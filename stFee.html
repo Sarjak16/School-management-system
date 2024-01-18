@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stFee</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+</head>
+<div class="container">
+    <body>
+    <div class="menu">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <!-- <li><a href="register.html">Register</a></li> -->
+          <li><a href="login.html">Login</a></li>
+          <li><a href="insert.html">Add Student</a></li>
+          <li><a href="#">Student Fee</a></li>
+        </ul>
+      </div>
+
+        <div class="form-box">
+        
+          <h2>Student Fee Collection</h2>
+          <form id="stFee">
+            <div class="form-group">
+              <label for="studentName">Student Name</label>
+              <input type="text" id="studentName" name="studentName" placeholder="Enter student name" required>
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="text" id="amount" name="amount" placeholder="Enter amount" required>
+            </div>
+            <div class="form-group">
+              <label for="paymentStatus">Payment Status</label>
+              <select id="paymentStatus" name="paymentStatus" required>
+                <option value="fully-paid">Fully Paid</option>
+                <option value="partially-paid">Partially Paid</option>
+                <option value="not-paid">Not Paid</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button type="submit">Record Payment</button>
+            </div>
+          </form>
+          <h2>Fee Collection Details</h2>
+    <table id="feeTable">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Amount</th>
+          <th>Payment Status</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        
+      </tbody>
+    </table>
+  
+          
+    </div>
+<script>
+
+  function recordPayment(event) {
+    event.preventDefault(); 
+
+    var studentName = document.getElementById("studentName").value;
+    var amount = document.getElementById("amount").value;
+    var paymentStatus = document.getElementById("paymentStatus").value;
+
+    var newRow = document.createElement("tr");
+
+    var nameCell = document.createElement("td");
+    nameCell.textContent = studentName;
+
+    var amountCell = document.createElement("td");
+    amountCell.textContent = amount;
+
+    var statusCell = document.createElement("td");
+    statusCell.classList.add("status-cell");
+    statusCell.classList.add("status-" + paymentStatus);
+    statusCell.textContent = formatPaymentStatus(paymentStatus);
+
+    newRow.appendChild(nameCell);
+    newRow.appendChild(amountCell);
+    newRow.appendChild(statusCell);
+
+    var feeTable = document.getElementById("feeTable");
+    feeTable.querySelector("tbody").appendChild(newRow);
+
+    document.getElementById("stFee").reset();
+  }
+
+  function formatPaymentStatus(status) {
+    switch (status) {
+      case "fully-paid":
+        return "Fully Paid";
+      case "partially-paid":
+        return "Partially Paid";
+      case "not-paid":
+        return "Not Paid";
+      default:
+        return "";
+    }
+  }
+
+  document.getElementById("stFee").addEventListener("submit", recordPayment);
+
+</script>
+  
+        </body>
+      </div>
+      <footer>
+          <p>&copy; 2024 School Management System. All rights reserved</p>
+        </footer>
+      
+      </html>
