@@ -1,5 +1,5 @@
 function showAlert1() {
-    alert("Registerd Succeed!");
+    alert("Registerd Successfully!");
   };
   
   function showAlert2() {
